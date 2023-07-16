@@ -73,19 +73,10 @@ void clear_map(char*** map, int height, int width)
     int i;
     int j;    
     printf("\n");
-    /*for (i = 0; i <= cols + 1; i++) 
-    {
-         printf("%c", '*');
-    }
-    printf("\n");
-    */
 
     for (i = 0; i < rows; i++) {
-        /*printf("%c", '*');*/
         for (j = 0; j < cols; j++) {
-           /* if (map[i][j] == '0')           
-                set_background("red");    
-            */              
+                       
             if (map[i][j] == E_HEAD)
                 set_background("blue") ;            
             else if (map[i][j] == E_BODY)
@@ -94,21 +85,22 @@ void clear_map(char*** map, int height, int width)
                 set_background("red") ;  
             else if (map[i][j] == E_CONDUCTOR)
                 set_background("yellow") ;  
-          
-            /*printf("%c ", map[i][j]);*/
-             printf("%s", "  ");
+
+            printf("%s", "  ");
             set_background("reset") ;         
         }
-       /*printf("*\n"); */    
         printf("\n");                            
     }
-    /*
-    for (i = 0; i <= cols + 1; i++) 
-    {
-         printf("%c", '*');
-    }
-    */
     printf("\n");   
 }
 
 
+enum E_MAP_ITEM get_item(char** map, Position pos)
+{
+    return map[pos.height][pos.width];
+}
+
+void put_item(char** map, Position pos, E_MAP_ITEM item_id)
+{
+    map[pos.height][pos.width] = item_id;
+}

@@ -2,7 +2,7 @@
 #include <time.h>
 #include "newSleep.h"
 
-void newSleep(float sec)
+void newSleep(double sec)
 {
 	struct timespec ts;
 	ts.tv_sec = (int) sec;

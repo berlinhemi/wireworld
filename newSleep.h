@@ -1,6 +1,6 @@
 #ifndef NEWSLEEP_H
 #define NEWSLEEP_H
 
-void newSleep(float sec);
+void newSleep(double sec);
 
 #endif

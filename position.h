@@ -4,8 +4,8 @@
 
 typedef struct Position
 {
-    int width;
     int height;
+    int width;   
 } Position;
 
 #endif

@@ -3,17 +3,19 @@
 
 #include "position.h"
 
-/*void move_player(char** map, char** coloring, int height, int width, 
-                Position* player_pos, Position* box_pos, char direction);
-*/
 
+/*implement next iteration of sumalation*/
+void do_iteration(char** map,  int height, int width);
 
-int do_itration(char** map,  int height, int width);
+/*fill array (conductors) of linked with head conductors*/
 void get_linked_conductors(Position head, 
                         Position *conductors, int *count, 
                         char** map,  int height, int width );
-void process_neihgborhood(Position conductor, char** map,  int height, int width );
+                       
+/*get count of heads, linked with conductor on conductor_pos*/
+int get_linked_heads_count(Position conductor_pos,  char** map,  int height, int width);
 
-/*int is_game_over(char** map, int height, int width, Position box_pos);*/
+/*remove or modify auxiliary labels (see item_type.h)*/
+void remove_special_labels( char** map,  int height, int width);
 
 #endif
