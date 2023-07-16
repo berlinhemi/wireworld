@@ -1,4 +1,5 @@
 #include "map.h"
+#include "item_type.h"
 
 void read_map(char*** map, int* lines, int* columns, const char* file_name)
 
@@ -10,18 +11,10 @@ void read_map(char*** map, int* lines, int* columns, const char* file_name)
         printf("no such file:%s", file_name);
         return;
     }
-   
-    
-    /*int ret = fscanf(file, "%d %d", lines, columns);*/
 
     int ret = fscanf(file, "%d%d", lines, columns);
     int height = *lines;
     int width = *columns;
-    
-    /*
-    printf("lines:%d\n", height);
-    printf("columns:%d\n", width);
-    */
 
     if(ret != 2)
     {
@@ -29,46 +22,34 @@ void read_map(char*** map, int* lines, int* columns, const char* file_name)
         return;
     }
    
-   /* printf("height:%d" ,*lines);*/
-   /*printf("width:%d", *columns);*/
-
-   
     *map = (char**) malloc(sizeof(char*) * height);
-    /* *coloring = (char**) malloc(sizeof(char*) * height); */
-
     int i;
     int j;
     for(i = 0; i < height; i++)
     {
         (*map)[i] = (char*)malloc(sizeof(char) * width);  
-        /* (*coloring)[i] = (char*)malloc(sizeof(char) * width); */
         memset((*map)[i], ' ', sizeof(char) * width);/*fill byte-by-byte*/ 
-        /* memset((*coloring)[i], 0, sizeof(char) * width); */
     }
 
-    
     int x = 0;
     int y = 0;
     int digit = 0;
     char item = 0;
-    
-
     for(i = 0; i < height; i++)
     {
         for(j = 0; j < width; j++)
         {
-            ret = fscanf(file, "%d",  &digit);
-            
+            ret = fscanf(file, "%d",  &digit); 
             if (ret == 1)
             {   
+                /*convert int (digit) to char and put it to map*/
                 item = digit + '0';
                 (*map)[i][j] = item;
             }     
             else 
             {
                 printf("error while reading file:invalid format.");
-            }
-            
+            }         
         }
     }
     fclose(file);
@@ -105,17 +86,17 @@ void clear_map(char*** map, int height, int width)
            /* if (map[i][j] == '0')           
                 set_background("red");    
             */              
-            if (map[i][j] == '1')
+            if (map[i][j] == E_HEAD)
                 set_background("blue") ;            
-            else if (map[i][j] == '2')
+            else if (map[i][j] == E_BODY)
                 set_background("green") ; 
-            else if (map[i][j] == '3')
+            else if (map[i][j] == E_TAIL)
                 set_background("red") ;  
-            else if (map[i][j] == '4')
+            else if (map[i][j] == E_CONDUCTOR)
                 set_background("yellow") ;  
           
-            /*printf("%c", map[i][j]);*/
-            printf("%s", "  ");
+            /*printf("%c ", map[i][j]);*/
+             printf("%s", "  ");
             set_background("reset") ;         
         }
        /*printf("*\n"); */    
@@ -130,36 +111,4 @@ void clear_map(char*** map, int height, int width)
     printf("\n");   
 }
 
-
-
-int get_item_position( char** map, int height, int width,  char item_id, Position* pos)
-{
- 
-    int i;
-    for (i = 0; i < height; i++) 
-    {  
-        int j;
-        for (j = 0; j < width; j++)
-        {
-            if (map[i][j] == item_id) 
-            {  
-                pos->height = i;
-                pos->width = j;
-                return 1;
-            } 
-        }
-                                 
-    }
-    return 0;
-}
-
-char get_item_from_field(char** field, Position pos)
-{
-    return field[pos.height][pos.width];
-}
-
-void put_item_on_field(char** field,  Position pos, char item_id)
-{
-    field[pos.height][pos.width] = item_id;
-}
 
