@@ -9,7 +9,10 @@
 
 
 int do_itration(char** map,  int height, int width);
-void get_linked_conductors(Position **conductors, int *count, char** map,  int height, int width );
+void get_linked_conductors(Position head, 
+                        Position *conductors, int *count, 
+                        char** map,  int height, int width );
+void process_neihgborhood(Position conductor, char** map,  int height, int width );
 
 /*int is_game_over(char** map, int height, int width, Position box_pos);*/
 
