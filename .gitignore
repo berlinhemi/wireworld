@@ -403,3 +403,6 @@ main
 color
 simulation
 newSleep
+out
+random
+*.zip
