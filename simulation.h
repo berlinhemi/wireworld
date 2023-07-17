@@ -16,11 +16,12 @@ void get_linked_conductors(Position head,
 int get_linked_heads_count(Position conductor_pos,  char** map,  int height, int width);
 
 /*remove or modify auxiliary labels (see item_type.h)*/
-void remove_special_labels( char** map,  int height, int width);
+void remove_auxiliary_labels( char** map,  int height, int width);
 
 int get_conductors_count(char** map,  int height, int width);
 /*get all conductors positions to array*/
 void get_all_conductors(Position** conductors, int* conductors_count, char** map,  int height, int width);
+
 /*put electron head to random conductor*/
 void put_random_head( char** map,  int height, int width);
 
