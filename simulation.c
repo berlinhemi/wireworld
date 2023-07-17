@@ -73,7 +73,7 @@ void do_iteration(char** map, int height, int width)
             }
         }
     }
-    remove_special_labels(map, height, width);
+    remove_auxiliary_labels(map, height, width);
 }
 
 void get_linked_conductors(Position head_pos, 
@@ -177,7 +177,7 @@ void process_neihgborhood(Position conductor, char** map,  int height, int width
     }
 }
 
-void remove_special_labels( char** map,  int height, int width)
+void remove_auxiliary_labels( char** map,  int height, int width)
 {
     int i = 0;
     int j = 0;
@@ -215,6 +215,7 @@ int get_conductors_count(char** map, int height, int width)
     }
     return result;
 }
+
 void get_all_conductors(Position **conductors, int* conductors_count, char** map,  int height, int width)
 {
     *conductors_count = get_conductors_count(map, height, width);
@@ -235,7 +236,7 @@ void get_all_conductors(Position **conductors, int* conductors_count, char** map
         }
     }
 }
-/*put electron head to random conductor*/
+
 void put_random_head( char** map,  int height, int width)
 {
     int conductors_count = 0;
