@@ -239,10 +239,13 @@ void get_all_conductors(Position **conductors, int* conductors_count, char** map
 void put_random_head( char** map,  int height, int width)
 {
     int conductors_count = 0;
+    /*array to store all conductors*/
     Position* conductors = NULL;
     get_all_conductors(&conductors, &conductors_count, map, height, width);
     initRandom();
-    int conductor_id = randomUCP(0, conductors_count - 1);
-    put_item(map, conductors[conductor_id], E_HEAD );
+    /*generate index of array with conductors*/
+    int rnd_index = randomUCP(0, conductors_count - 1);
+    /*put electron head to position of random conductor*/
+    put_item(map, conductors[rnd_index], E_HEAD );
     
 }
