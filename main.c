@@ -33,6 +33,15 @@ int main(int argc, char* argv[])
         int i = 0;
         while(i < steps)
         {
+            
+            if(random_toggle == 1)
+            {
+                if(i != 0 && i % 10 == 0)
+                {
+                    put_random_head(map, height,width);
+                }
+                
+            }
             print_map(map, height, width);	
             do_iteration(map, height,width);
             newSleep(sleep_secs);

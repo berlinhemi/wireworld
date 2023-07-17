@@ -1,10 +1,80 @@
 
 #include "item_type.h"
 #include "map.h"
+#include "random.h"
 #include "simulation.h"
+
 #include "stdio.h"
 
 
+
+
+void do_iteration(char** map, int height, int width) 
+{
+    const int max_head_count = 2;
+    int i = 0;
+    int j = 0;
+    //loop over all items
+    for (i = 0; i < height; i++) 
+    {
+        for (j = 0; j < width; j++) 
+        {
+            switch(map[i][j]) 
+            {
+            case E_TAIL:               /* red(tail) */
+                map[i][j] = E_CONDUCTOR;
+                break;
+            case E_BODY:               /* green(body) */
+                map[i][j] = E_TAIL;
+                break;
+            case E_HEAD:               /* blue(head) */
+                {
+                    Position head_pos = {i, j};
+                    const int max_neighbors = 8;
+                    Position conductors[max_neighbors];
+                    int conductors_count = 0;
+                    /*save nearest to current head conductors to array*/
+                    get_linked_conductors(head_pos, conductors, &conductors_count, map, height, width );
+                    int k;
+                    /*process nearest conductors*/
+                    for (k = 0; k < conductors_count; k++)
+                    {
+                        /*if(map[conductors[k].height][conductors[k].width] != E_BLOCKED)*/
+                        if(get_item(map, conductors[k]) != E_BLOCKED)
+                        {
+                            
+                            int head_count = get_linked_heads_count(conductors[k], map, height, width);
+                            if (head_count <= max_head_count)
+                            {
+                                /*OK, count of nearest heads is not greater max_head_count*/
+                                put_item(map, conductors[k], E_TEMP_CONDUCTOR);
+                                /*map[conductors[k].height][conductors[k].width] = E_TEMP_CONDUCTOR;*/
+                                /*process_neihgborhood(conductors[k], map, height, width );*/
+                            }
+                            else
+                            {
+                                /*set special mark so as not to process these elements later in loop*/
+                                put_item(map, conductors[k], E_BLOCKED);
+                                /*map[conductors[k].height][conductors[k].width] = E_BLOCKED;*/
+                            }
+                            
+                        }
+                        
+                    }
+                    put_item(map, head_pos, E_BODY);
+                    /*map[head_pos.height][head_pos.width] = E_BODY;*/ 
+                    
+                    break;
+                }
+             
+            
+            default:
+                break;
+            }
+        }
+    }
+    remove_special_labels(map, height, width);
+}
 
 void get_linked_conductors(Position head_pos, 
                         Position *conductors, int *count,
@@ -128,71 +198,51 @@ void remove_special_labels( char** map,  int height, int width)
     }
 }
 
-
-
-void do_iteration(char** map, int height, int width) 
+int get_conductors_count(char** map, int height, int width)
 {
-    const int max_head_count = 2;
+    int result = 0;
     int i = 0;
     int j = 0;
-    //loop over all items
     for (i = 0; i < height; i++) 
     {
         for (j = 0; j < width; j++) 
         {
-            switch(map[i][j]) 
+            if(map[i][j] == E_CONDUCTOR)
             {
-            case E_TAIL:               /* red(tail) */
-                map[i][j] = E_CONDUCTOR;
-                break;
-            case E_BODY:               /* green(body) */
-                map[i][j] = E_TAIL;
-                break;
-            case E_HEAD:               /* blue(head) */
-                {
-                    Position head_pos = {i, j};
-                    const int max_neighbors = 8;
-                    Position conductors[max_neighbors];
-                    int conductors_count = 0;
-                    /*save nearest to current head conductors to array*/
-                    get_linked_conductors(head_pos, conductors, &conductors_count, map, height, width );
-                    int k;
-                    /*process nearest conductors*/
-                    for (k = 0; k < conductors_count; k++)
-                    {
-                        /*if(map[conductors[k].height][conductors[k].width] != E_BLOCKED)*/
-                        if(get_item(map, conductors[k]) != E_BLOCKED)
-                        {
-                            
-                            int head_count = get_linked_heads_count(conductors[k], map, height, width);
-                            if (head_count <= max_head_count)
-                            {
-                                /*OK, count of nearest heads is not greater max_head_count*/
-                                put_item(map, conductors[k], E_TEMP_CONDUCTOR);
-                                /*map[conductors[k].height][conductors[k].width] = E_TEMP_CONDUCTOR;*/
-                                /*process_neihgborhood(conductors[k], map, height, width );*/
-                            }
-                            else
-                            {
-                                /*set special mark so as not to process these elements later in loop*/
-                                put_item(map, conductors[k], E_BLOCKED);
-                                /*map[conductors[k].height][conductors[k].width] = E_BLOCKED;*/
-                            }
-                            
-                        }
-                        
-                    }
-                    put_item(map, head_pos, E_BODY);
-                    /*map[head_pos.height][head_pos.width] = E_BODY;*/ 
-                    
-                    break;
-                }
-             
-            
-            default:
-                break;
+                result++;
             }
         }
     }
-    remove_special_labels(map, height, width);
+    return result;
+}
+void get_all_conductors(Position **conductors, int* conductors_count, char** map,  int height, int width)
+{
+    *conductors_count = get_conductors_count(map, height, width);
+    *conductors = (Position*)malloc(sizeof(Position) * (*conductors_count));
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    for (i = 0; i < height; i++) 
+    {
+        for (j = 0; j < width; j++) 
+        {
+            if(map[i][j] == E_CONDUCTOR)
+            {
+                Position pos = {i, j};
+                (*conductors)[k] = pos;
+                k++;
+            }
+        }
+    }
+}
+/*put electron head to random conductor*/
+void put_random_head( char** map,  int height, int width)
+{
+    int conductors_count = 0;
+    Position* conductors = NULL;
+    get_all_conductors(&conductors, &conductors_count, map, height, width);
+    initRandom();
+    int conductor_id = randomUCP(0, conductors_count - 1);
+    put_item(map, conductors[conductor_id], E_HEAD );
+    
 }
