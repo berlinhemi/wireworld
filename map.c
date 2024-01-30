@@ -4,6 +4,7 @@
 void read_map(char*** map, int* lines, int* columns, const char* file_name)
 
  {
+
     
     FILE* file = fopen(file_name, "r");
     if (file == NULL) 
