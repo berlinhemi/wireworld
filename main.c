@@ -9,12 +9,11 @@
 #include "simulation.h"
 
 const char *argp_program_version = "wireworld 1.0";
-static char doc[] = "Wireworld is a cellular automaton first proposed by Brian Silverman";
+static char doc[] = "Wireworld: cellular automaton first proposed by Brian Silverman";
 const char *argp_program_bug_address = "<e-mail address>";
 static char args_doc[] = "MAP_FILE";
 
 static struct argp_option options[] = {
-    //{"fname", 'f', "PATH", 0, "File with map"},
     {"steps", 's', "COUNT", 0, "Count of steps in automation"},
     {"timeout", 't', "SEC", 0, "Interval between steps (seconds)"},
     {"random", 'r', 0, 0, "Put head in random place"},
@@ -23,7 +22,6 @@ static struct argp_option options[] = {
 
 struct arguments{
     char* args[1];
-   // char* file_name;
     int steps;
     int timeout;
     int  random;
@@ -34,9 +32,6 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state){
     struct arguments *arguments = state->input;
     switch(key){
 
-       // case 'f':
-        //    arguments->file_name = arg;
-        //    break;
         case 's':
             arguments->steps = atoi(arg);
             break;
@@ -48,10 +43,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state){
             break;
 
         case ARGP_KEY_ARG:
-            // Too many arguments, if your program expects only one argument.
-            if(state->arg_num > 1)
+            if(state->arg_num >= 1)
             {
-                //printf("Too many arguments.\n");
+                printf("Too many arguments.\n");
                 argp_usage(state);
             }
                
@@ -59,10 +53,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state){
             break;
 
         case ARGP_KEY_END:
-            // Not enough arguments. if your program expects exactly one argument.
             if(state->arg_num < 1)
             {
-                //printf("Not enough arguments.\n");
+                printf("Not enough arguments.\n");
                 argp_usage(state);
             }
                 
@@ -92,18 +85,11 @@ int main(int argc, char* argv[])
 
     struct arguments arguments;
 
-    //arguments.file_name = 0;
     arguments.steps = 10;
     arguments.timeout = 1;
     arguments.random = 0;
 
     argp_parse(&argp, argc, argv, 0, 0, &arguments);
-
-    // if(argc < 5)
-    // {
-    //     show_help();
-    //     return 1;
-    // }
     
     char** map = NULL;
     int height = 0;
