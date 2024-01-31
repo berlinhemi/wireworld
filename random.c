@@ -14,6 +14,7 @@ void initRandom()
    Please ensure you call initRandom function once before starting using this function. */
 int randomUCP(int low, int high)
 {
+    initRandom();
     int number = -1;
 
     if(low <= high)
