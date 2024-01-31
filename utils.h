@@ -1,7 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-void newSleep(double sec);
-int randomUCP(int low, int high);
+void sleep(double sec);
+int random_between(int low, int high);
+void clear_console();
 
 #endif

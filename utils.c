@@ -22,3 +22,8 @@ void sleep(double sec)
 	ts.tv_nsec = (sec - ((int) sec)) * 1000000000;
 	nanosleep(&ts,NULL);
 }
+
+void clear_console()
+{
+    system("clear");
+}
