@@ -2,8 +2,11 @@
 #define MAP_ITEM_H
 
 enum E_MAP_ITEM {
-    E_EMPTY = '0', E_HEAD = '1', E_BODY = '2',
-    E_TAIL = '3', E_CONDUCTOR = '4',
+    E_EMPTY = '0', 
+    E_HEAD = '1', 
+    E_BODY = '2',
+    E_TAIL = '3', 
+    E_CONDUCTOR = '4',
 
     /*auxiliary labels*/
     /*E_BLOCKED: means that neighborhood contains more than 2 heads */
