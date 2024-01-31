@@ -5,7 +5,7 @@
 
 #include "color.h"
 #include "map.h"
-#include "newSleep.h"
+#include "utils.h"
 #include "simulation.h"
 
 const char *argp_program_version = "wireworld 1.0";
@@ -107,7 +107,6 @@ int main(int argc, char* argv[])
         int i = 0;
         while(i < steps)
         {
-            
             if(random_toggle == 1)
             {
                 if(i != 0 && i % 10 == 0)
@@ -118,7 +117,7 @@ int main(int argc, char* argv[])
             }
             print_map(map, height, width);	
             do_iteration(map, height,width);
-            newSleep(sleep_secs);
+            sleep(sleep_secs);
             system("clear");
             i++;
         }

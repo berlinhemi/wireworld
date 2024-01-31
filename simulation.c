@@ -1,7 +1,7 @@
 
 #include "item_type.h"
 #include "map.h"
-#include "random.h"
+#include "utils.h"
 #include "simulation.h"
 
 #include "stdio.h"
@@ -247,7 +247,7 @@ void put_random_head( char** map,  int height, int width)
     if(conductors_places != NULL)
     {
         /*generate index of array with conductors*/
-        int rnd_index = randomUCP(0, conductors_count - 1);
+        int rnd_index = random_between(0, conductors_count - 1);
         /*put electron head to position of random conductor*/
         put_item(map, conductors_places[rnd_index], E_HEAD );
         free(conductors_places);
