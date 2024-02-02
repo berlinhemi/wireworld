@@ -408,5 +408,5 @@ random
 *.zip
 CMake*
 !CMakeLists.txt
-MakeFile
+Makefile
 cmake*
