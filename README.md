@@ -1,7 +1,10 @@
-# wireworld
+# About
 Program that visualizes a Cellular Automata simulation similar Wireworld
-
-# build & run 
-gcc -o main main.c map.c color.c newSleep.c simulation.c random.c
-
-./main maps/map_small.txt 15 0.5 0
+# Build 
+mkdir build
+cd build
+cmake ..
+make
+# Run
+./wireworld --steps=20 --timeout=1 maps/map_small.txt
+./wireworld --steps=30 --timeout=0.5 --random maps/map_or.txt
