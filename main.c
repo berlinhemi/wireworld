@@ -35,10 +35,14 @@ int main(int argc, char* argv[])
 
     const char* file_name;
     int steps;
-    double sleep_secs;
+    double timeout;
     int random_toggle;
     
-    set_params(arguments, &file_name, &steps, &sleep_secs, &random_toggle);
+    if (set_params(arguments, &file_name, &steps, &timeout, &random_toggle) != 0)
+    {
+        printf("%s\n", "Error while cmd arguments parsing");
+        return -1;
+    }
 
     char** map = NULL;
     int height = 0;
@@ -60,7 +64,7 @@ int main(int argc, char* argv[])
             }
             print_map(map, height, width);	
             do_iteration(map, height,width);
-            sleep(sleep_secs);
+            sleep(timeout);
             clear_console();
             i++;
         }
