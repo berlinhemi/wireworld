@@ -406,3 +406,7 @@ newSleep
 out
 random
 *.zip
+CMake*
+!CMakeLists.txt
+MakeFile
+cmake*
