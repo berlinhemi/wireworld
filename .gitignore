@@ -406,8 +406,5 @@ newSleep
 out
 random
 *.zip
-CMake*
+build/*
 !CMakeLists.txt
-Makefile
-cmake*
-wireworld
