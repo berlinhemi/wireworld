@@ -33,11 +33,13 @@ int main(int argc, char* argv[])
 
     argp_parse(&argp, argc, argv, 0, 0, &arguments);
 
-    const char* file_name = arguments.args[0];
-    int steps = arguments.steps;
-    double sleep_secs = arguments.timeout;
-    int random_toggle = arguments.random;
+    const char* file_name;
+    int steps;
+    double sleep_secs;
+    int random_toggle;
     
+    set_params(arguments, &file_name, &steps, &sleep_secs, &random_toggle);
+
     char** map = NULL;
     int height = 0;
     int width = 0;
