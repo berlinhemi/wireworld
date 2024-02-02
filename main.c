@@ -2,12 +2,11 @@
 #include "stdlib.h"
 #include "string.h"
 
-
 #include "argparcer.h"
 #include "color.h"
 #include "map.h"
-#include "utils.h"
 #include "simulation.h"
+#include "utils.h"
 
 
 // void show_help()
@@ -25,20 +24,23 @@ int main(int argc, char* argv[])
 
     struct arguments arguments;
 
+    /*
+        Default values
+    */
     arguments.steps = 10;
     arguments.timeout = 1;
     arguments.random = 0;
 
     argp_parse(&argp, argc, argv, 0, 0, &arguments);
-    
-    char** map = NULL;
-    int height = 0;
-    int width = 0;
 
     const char* file_name = arguments.args[0];
     int steps = arguments.steps;
     double sleep_secs = arguments.timeout;
     int random_toggle = arguments.random;
+    
+    char** map = NULL;
+    int height = 0;
+    int width = 0;
 
     read_map( &map, &height,  &width, file_name);
 
@@ -52,8 +54,7 @@ int main(int argc, char* argv[])
                 if(i != 0 && i % 10 == 0)
                 {
                     put_random_head(map, height,width);
-                }
-                
+                }                
             }
             print_map(map, height, width);	
             do_iteration(map, height,width);
