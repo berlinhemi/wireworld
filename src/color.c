@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"color.h"
+
+#include "include/color.h"
 
 void set_foreground(char * color)
 {

@@ -1,10 +1,9 @@
 
-#include "item_type.h"
-#include "map.h"
-#include "utils.h"
-#include "simulation.h"
+#include "include/item_type.h"
+#include "include/map.h"
+#include "include/utils.h"
+#include "include/simulation.h"
 
-#include "stdio.h"
 
 
 

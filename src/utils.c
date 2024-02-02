@@ -1,6 +1,7 @@
-#include<stdlib.h>
-#include<time.h>
-#include"utils.h"
+#include <stdlib.h>
+#include <time.h>
+
+#include "include/utils.h"
 
 int random_between(int low, int high)
 {
