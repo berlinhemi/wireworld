@@ -26,19 +26,20 @@ extern "C" {
 
 TEST(MapTests, read_map_NotExistsMap)
 {
-    const std::string map_fname  = "404.txt";
+    const std::string map_fname  = "test_maps/404.txt";
     char** map = NULL;
     int height = 0;
     int width = 0;
 
     const int expected = -1;
-    const int actual = read_map(&map, &height,  &width, map_fname.c_str());
+    const 
+    int actual = read_map(&map, &height,  &width, map_fname.c_str());
     ASSERT_EQ(expected, actual);
 }
 
-TEST(MapTests, read_map_EmptyMap)
+TEST(MapTests, read_map_ZeroSizeMap)
 {
-    const std::string map_fname  = "empty_map.txt";
+    const std::string map_fname  = "test_maps/empty_map.txt";
     char** map = NULL;
     int height = 0;
     int width = 0;

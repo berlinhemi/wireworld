@@ -11,14 +11,21 @@ int read_map(char*** map, int* lines, int* columns, const char* file_name)
     }
 
     int ret = fscanf(file, "%d%d", lines, columns);
-    int height = *lines;
-    int width = *columns;
 
     if(ret != 2)
     {
         printf("Error while reading lines and colums count\n");
         return -1;
     }
+    int height = *lines;
+    int width = *columns;
+
+    if(height < 1 || width < 1)
+    {
+        printf("Invalid height or width value\n");
+        return -1;
+    }
+
    
     *map = (char**) malloc(sizeof(char*) * height);
     int i;

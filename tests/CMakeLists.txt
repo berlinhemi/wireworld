@@ -19,10 +19,14 @@ target_link_libraries(utils_test PRIVATE GTest::GTest utils)
 
 target_link_libraries(map_test PRIVATE GTest::GTest map color)
 
-add_test(utils_gtests utils_test)
-add_test( NAME map_gtests
-          COMMAND map_test
-          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        ) 
+add_test(NAME utils_gtests 
+        COMMAND utils_test
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR
+        )
 
-message(CMAKE_CURRENT_BINARY_DIR="${CMAKE_CURRENT_BINARY_DIR}")
+add_test( NAME  map_gtests
+         COMMAND  map_test
+         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+       ) 
+
+message(CMAKE_CURRENT_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
