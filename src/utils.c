@@ -26,5 +26,5 @@ void sleep(double sec)
 
 void clear_console()
 {
-    system("clear");
+    system("clear -x");
 }
