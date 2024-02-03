@@ -1,13 +1,13 @@
 #include "map.h"
 #include "item_type.h"
 
-void read_map(char*** map, int* lines, int* columns, const char* file_name)
+int read_map(char*** map, int* lines, int* columns, const char* file_name)
  {
     FILE* file = fopen(file_name, "r");
     if (file == NULL) 
     {
         printf("no such file:%s", file_name);
-        return;
+        return -1;
     }
 
     int ret = fscanf(file, "%d%d", lines, columns);
@@ -17,7 +17,7 @@ void read_map(char*** map, int* lines, int* columns, const char* file_name)
     if(ret != 2)
     {
         printf("error while reading lines and colums count");
-        return;
+        return -1;
     }
    
     *map = (char**) malloc(sizeof(char*) * height);
@@ -29,8 +29,6 @@ void read_map(char*** map, int* lines, int* columns, const char* file_name)
         memset((*map)[i], ' ', sizeof(char) * width);/*fill byte-by-byte*/ 
     }
 
-    int x = 0;
-    int y = 0;
     int digit = 0;
     char item = 0;
     for(i = 0; i < height; i++)
@@ -47,12 +45,12 @@ void read_map(char*** map, int* lines, int* columns, const char* file_name)
             else 
             {
                 printf("error while reading file:invalid format.");
-                return;
+                return -1;
             }         
         }
     }
-    fclose(file);
-    
+    fclose(file);  
+    return 0;
  }
 
 

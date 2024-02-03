@@ -48,30 +48,36 @@ int main(int argc, char* argv[])
     int height = 0;
     int width = 0;
 
-    read_map( &map, &height,  &width, file_name);
-
-    if(map != NULL )
+    
+    if(read_map( &map, &height,  &width, file_name) != -1)
     {
-        int i = 0;
-        while(i < steps)
+         if(map != NULL )
         {
-            if(random_toggle == 1)
+            int i = 0;
+            while(i < steps)
             {
-                if(i != 0 && i % 10 == 0)
+                if(random_toggle == 1)
                 {
-                    put_random_head(map, height,width);
-                }                
+                    if(i != 0 && i % 10 == 0)
+                    {
+                        put_random_head(map, height,width);
+                    }                
+                }
+                print_map(map, height, width);	
+                do_iteration(map, height,width);
+                custom_sleep(timeout);
+                clear_console();
+                i++;
             }
-            print_map(map, height, width);	
-            do_iteration(map, height,width);
-            custom_sleep(timeout);
-            clear_console();
-            i++;
+            
+            clear_map(&map, height, width);
         }
-        
-        clear_map(&map, height, width);
     }
-        
+    else
+    {
+        printf("%s\n", "Error in map reading");
+        return -1;
+    }
     return 0;
 }
 
