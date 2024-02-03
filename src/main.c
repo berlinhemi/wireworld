@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
             }
             print_map(map, height, width);	
             do_iteration(map, height,width);
-            sleep(timeout);
+            custom_sleep(timeout);
             clear_console();
             i++;
         }

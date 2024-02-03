@@ -3,6 +3,7 @@
 
 #include "include/utils.h"
 
+
 int random_between(int low, int high)
 {
     srand(time(NULL));
@@ -16,7 +17,7 @@ int random_between(int low, int high)
     return number;
 }
 
-void sleep(double sec)
+void custom_sleep(double sec)
 {
 	struct timespec ts;
 	ts.tv_sec = (int) sec;
