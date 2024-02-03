@@ -10,7 +10,7 @@
 
 
 
-void read_map(char*** map, int* height, int* width, const char* file_name);    
+int read_map(char*** map, int* height, int* width, const char* file_name);    
 void print_map(char** map, int height, int width);        
 void clear_map(char*** map, int height, int width);
 
