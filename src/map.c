@@ -2,10 +2,7 @@
 #include "item_type.h"
 
 void read_map(char*** map, int* lines, int* columns, const char* file_name)
-
  {
-
-    
     FILE* file = fopen(file_name, "r");
     if (file == NULL) 
     {
@@ -50,6 +47,7 @@ void read_map(char*** map, int* lines, int* columns, const char* file_name)
             else 
             {
                 printf("error while reading file:invalid format.");
+                return;
             }         
         }
     }
