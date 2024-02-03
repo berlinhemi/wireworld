@@ -17,6 +17,17 @@ TEST(UtilsTests, random_between_ZeroZero)
     ASSERT_EQ(expected, actual);
 }
 
+TEST(UtilsTests, random_between_0_max){
+    const int max_runs = 1000;
+    for(int max = 0; max < max_runs; max++)
+    {
+        int rnd_value = random_between(0, max);
+        EXPECT_LE(0,  rnd_value);
+        EXPECT_LE(rnd_value, max);
+    }
+}
+
+
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
