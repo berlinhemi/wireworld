@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.0.1)
 project(wireworld)
 include_directories(src/include)
 file(GLOB SOURCES "src/*.c")
