@@ -2,11 +2,11 @@
 #include "item_type.h"
 
 int read_map(char*** map, int* lines, int* columns, const char* file_name)
- {
+{
     FILE* file = fopen(file_name, "r");
     if (file == NULL) 
     {
-        printf("no such file:%s", file_name);
+        printf("No such file:%s\n", file_name);
         return -1;
     }
 
@@ -16,7 +16,7 @@ int read_map(char*** map, int* lines, int* columns, const char* file_name)
 
     if(ret != 2)
     {
-        printf("error while reading lines and colums count");
+        printf("Error while reading lines and colums count\n");
         return -1;
     }
    
@@ -44,7 +44,7 @@ int read_map(char*** map, int* lines, int* columns, const char* file_name)
             }     
             else 
             {
-                printf("error while reading file:invalid format.");
+                printf("Error while reading file:invalid format.\n");
                 return -1;
             }         
         }
