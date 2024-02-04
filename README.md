@@ -1,5 +1,6 @@
 ## About
 Program that visualizes a Cellular Automata simulation similar Wireworld
+![example of simulation](maps/map_or.png)
 ## Build 
 ```sh
 mkdir build
