@@ -21,7 +21,7 @@ target_link_libraries(map_test PRIVATE GTest::GTest map color)
 
 add_test(NAME utils_gtests 
         COMMAND utils_test
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         )
 
 add_test( NAME  map_gtests

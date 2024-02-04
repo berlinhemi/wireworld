@@ -1,4 +1,5 @@
-extern "C" {
+extern "C" 
+{
     #include <map.h>
 }
 #include <gtest/gtest.h>
@@ -6,25 +7,7 @@ extern "C" {
 
 
 
-// TEST(UtilsTests, random_between_ZeroZero)
-// {
-//     const auto expected = 0;
-//     const auto actual = random_between(0,0);
-//     ASSERT_EQ(expected, actual);
-// }
-
-// TEST(UtilsTests, random_between_0_max){
-//     const int max_runs = 1000;
-//     for(int max = 0; max < max_runs; max++)
-//     {
-//         int rnd_value = random_between(0, max);
-//         EXPECT_LE(0,  rnd_value);
-//         EXPECT_LE(rnd_value, max);
-//     }
-// }
-
-
-TEST(MapTests, read_map_NotExistsMap)
+TEST(MapTests, read_map_not_exist)
 {
     const std::string map_fname  = "test_maps/404.txt";
     char** map = NULL;
@@ -37,9 +20,9 @@ TEST(MapTests, read_map_NotExistsMap)
     ASSERT_EQ(expected, actual);
 }
 
-TEST(MapTests, read_map_ZeroSizeMap)
+TEST(MapTests, read_map_zero_size_map)
 {
-    const std::string map_fname  = "test_maps/empty_map.txt";
+    const std::string map_fname  = "test_maps/map_zero_size.txt";
     char** map = NULL;
     int height = 0;
     int width = 0;
@@ -47,6 +30,54 @@ TEST(MapTests, read_map_ZeroSizeMap)
     const int expected = -1;
     const int actual = read_map(&map, &height,  &width, map_fname.c_str());
     ASSERT_EQ(expected, actual);
+}
+
+TEST(MapTests, read_map_3x3_empty)
+{
+    const std::string map_fname  = "test_maps/map_3x3_empty.txt";
+    
+    int height = 0;
+    int width = 0;
+    char** actual = NULL;
+    const char expected[3][3] = {
+        '0','0','0',
+        '0','0','0',
+        '0','0','0'
+        };
+    const int read_success = read_map(&actual, &height,  &width, map_fname.c_str());
+    ASSERT_EQ(read_success, 0);
+    for(int i = 0; i < height; i++)
+    {
+        for(int j = 0; j < height; j++)
+        {
+            ASSERT_EQ(expected[i][j], actual[i][j]);
+        }
+    }
+}
+
+TEST(MapTests, read_map_5x5_square)
+{
+    const std::string map_fname  = "test_maps/map_5x5_square.txt";
+    
+    int height = 0;
+    int width = 0;
+    char** actual = NULL;
+    const char expected[5][5] = {
+        '3','2','1','4','4',
+        '4','0','0','0','4',
+        '4','0','0','0','4',
+        '4','0','0','0','4',
+        '4','4','4','4','4'
+        };
+    const int read_success = read_map(&actual, &height,  &width, map_fname.c_str());
+    ASSERT_EQ(read_success, 0) << "read_map result";
+    for(int i = 0; i < height; i++)
+    {
+        for(int j = 0; j < height; j++)
+        {
+            ASSERT_EQ(expected[i][j], actual[i][j]) << "str:" << i << "col:" << j;
+        }
+    }
 }
 
 

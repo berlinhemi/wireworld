@@ -1,4 +1,5 @@
-extern "C" {
+extern "C" 
+{
     #include <utils.h>
 }
 #include <gtest/gtest.h>
