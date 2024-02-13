@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
     
     if(read_map( &map, &height,  &width, file_name) != -1)
     {
-         if(map != NULL )
+         if(map)
         {
             int i = 0;
             while(i < steps)
