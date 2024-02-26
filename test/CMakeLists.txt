@@ -20,7 +20,8 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 #include_directories(../third-party/googletest/googletest/include)
 # gtest_build_include_dirs - var from googletest CMakeLists
-include_directories(${gtest_build_include_dirs})
+#include_directories(${gtest_build_include_dirs})
+#message(STATUS "${gtest_build_include_dirs}")
 include_directories(../src/include)
 add_executable(utils_test utils_test.cpp)
 add_executable(map_test map_test.cpp)

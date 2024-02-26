@@ -4,9 +4,7 @@ project(wireworld)
 enable_testing()
 
 add_subdirectory(src)
-
-add_subdirectory(tests)
-
+add_subdirectory(test)
 add_subdirectory(third-party/googletest EXCLUDE_FROM_ALL)
 #include_directories(src/include)
 #file(GLOB SOURCES "src/*.c")
